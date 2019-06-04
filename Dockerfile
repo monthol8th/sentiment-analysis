@@ -10,4 +10,7 @@ RUN apk add --virtual build-runtime \
     && apk del build-runtime \
     && rm -rf /var/cache/apk/*
 
+RUN apk add --no-cache libstdc++ openblas gcc g++
+ADD vectorize.pkl model.pkl /srv/
+
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "api:app"]
